@@ -12,6 +12,7 @@ class Profile(models.Model):
                                      symmetrical=False,
                                      blank=True
                                      )
+    date_modified = models.DateTimeField(User, auto_now=True)
 
     def __str__(self):
         return self.user.username
@@ -24,6 +25,7 @@ def create_profile(sender, instance, created, **kwargs):
         user_profile.save()
         user_profile.follows.set([instance.profile.id])
         user_profile.save()
+
 
 
 post_save.connect(create_profile, sender=User)
