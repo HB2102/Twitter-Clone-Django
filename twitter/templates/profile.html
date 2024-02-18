@@ -61,6 +61,12 @@
                 </p>
               </div>
             </div>
+            <br>
+            {% if request.user.id == profile.user.id %}
+            <a href="{% url 'update_user' %}" class="btn btn-outline-secondary col-12">
+                    Update Profile
+            </a>
+            {% endif %}
 
 
 
