@@ -147,3 +147,13 @@ def tweet_show(request, pk):
     else:
         messages.success(request, "This tweet does not exist")
         return redirect('home')
+
+
+def followers(request, pk):
+    if request.user.is_authenticated:
+        see_user = User.objects.get(id=pk)
+        profiles = Profile.objects.get(user_id=pk)
+        return render(request, 'followers.html', {'profiles': profiles, 'see_user': see_user})
+    else:
+        messages.success(request, 'You must be logged in to access this page')
+        return redirect('home')

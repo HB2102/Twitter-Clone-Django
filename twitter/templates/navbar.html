@@ -33,9 +33,9 @@
         <li class="nav-link navbar-brand">
           <a href="{% url 'profile' request.user.id %}">
             {% if profile.profile_image %}
-            <img src="{{ user.profile_image.url }}" style="height: 100%; aspect-ratio : 1 / 1;" class="rounded-circle"> <br><br>
+            <img src="{{ user.profile_image.url }}" style="height: 100%; aspect-ratio : 1 / 1;" class="rounded-circle" alt="{{ profile.user.username }}"> <br><br>
             {% else %}
-            <img src="{% static 'images/default_profile_picture.png' %}" style="width: 80%; aspect-ratio : 1 / 1;" class="rounded-circle col-12" alt="{{ profile.user.username }}">
+            <img src="{% static 'images/default_profile_picture.png' %}" style="width: 80%; aspect-ratio : 1 / 1;" class="rounded-circle" alt="{{ profile.user.username }}">
             {% endif %}
           </a>
         </li>

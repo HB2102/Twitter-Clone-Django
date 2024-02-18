@@ -121,7 +121,7 @@
               </div>
               <div class="card-body">
                 <p class="card-text">
-                    {% for followed in profile.followed_by.all %}
+                    {% for followed in profile.followed_by.all|slice:5 %}
                     {% if followed.id != profile.user.id %}
                         <a href="{% url 'profile' followed.user.id %}" class="btn btn-outline-primary col-12" style="margin-top: 0.25rem">@{{ followed }}</a><br>
                     {% endif %}
@@ -130,6 +130,9 @@
                     {% endif %}
                 </p>
               </div>
+                <div class="card-footer">
+                    <a href="{% url 'followers' profile.user.id %}" class="btn btn-outline-dark col-12">See All</a>
+                </div>
             </div>
             <br>
             {% if request.user.id == profile.user.id %}
