@@ -8,6 +8,15 @@
     <div class="row">
         <div class="col-lg-8 col-ld-8 col-sm-8 col-12">
             <h1>{{ profile.user.username }}'s Profile</h1>
+            {% if tweets %}
+            {% for tweet in tweets %}
+                <div class="alert alert-dark" role="alert">
+                  {{ tweet.body }} <br><br>
+                  <small class="text-muted">{{ tweet.created_at }} By <a href="{% url 'profile' tweet.user.id %}">@{{ tweet.user.username|lower }}</a></small>
+                </div>
+                <br>
+            {% endfor %}
+            {% endif %}
         </div>
 
         <div class="col-lg-4 col-ld-4 col-sm-4 col-12">
