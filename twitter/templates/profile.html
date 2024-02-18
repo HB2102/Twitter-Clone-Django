@@ -20,6 +20,9 @@
         </div>
 
         <div class="col-lg-4 col-ld-4 col-sm-4 col-12">
+            {% if profile.profile_image %}
+            <img src="{{ profile.profile_image.url }}" style="width: 80%"> <br><br>
+            {% endif %}
             <form method="POST">
                 {% csrf_token %}
                 {% if profile in user.profile.follows.all %}
