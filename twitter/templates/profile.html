@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
@@ -11,8 +12,21 @@
             {% if tweets %}
             {% for tweet in tweets %}
                 <div class="alert alert-dark" role="alert">
-                  {{ tweet.body }} <br><br>
-                  <small class="text-muted">{{ tweet.created_at }} By <a href="{% url 'profile' tweet.user.id %}">@{{ tweet.user.username|lower }}</a></small>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 col-ld-3 col-sm-3 col-xs-4">
+                                {% if profile.profile_image %}
+                                <img style="width: 100%; aspect-ratio : 1 / 1;" src="{{ profile.profile_image.url }}" class="rounded-circle col-12" alt="{{ profile.user.username }}">
+                                {% else %}
+                                <img style="height: 100%; aspect-ratio : 1 / 1;" src="{% static 'images/default_profile_picture.png' %}" class="rounded-circle col-12" alt="{{ profile.user.username }}">
+                                {% endif %}
+                            </div>
+                            <div class="col-lg-10 col-ld-9 col-sm-9 col-xs-8" align="left">
+                                {{ tweet.body }} <br><br>
+                                <small class="text-muted">{{ tweet.created_at }} By <a href="{% url 'profile' tweet.user.id %}">@{{ tweet.user.username|lower }}</a></small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <br>
             {% endfor %}
@@ -21,7 +35,7 @@
 
         <div class="col-lg-4 col-ld-4 col-sm-4 col-12">
             {% if profile.profile_image %}
-            <img src="{{ profile.profile_image.url }}" style="width: 80%"> <br><br>
+            <img src="{{ profile.profile_image.url }}" style="width: 80%; aspect-ratio : 1 / 1;" class="rounded-circle"> <br><br>
             {% endif %}
             <form method="POST">
                 {% csrf_token %}

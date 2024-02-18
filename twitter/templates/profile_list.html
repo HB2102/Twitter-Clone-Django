@@ -9,7 +9,11 @@
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{% static 'images/default_profile_picture.png' %}" class="img-fluid rounded-start" alt="profile image">
+                {% if profile.profile_image %}
+                <img style="height: 100%; aspect-ratio : 1 / 1;" src="{{ profile.profile_image.url }}" class="img-fluid rounded-start" alt="{{ profile.user.username }}">
+                {% else %}
+                <img src="{% static 'images/default_profile_picture.png' %}" class="img-fluid rounded-start" alt="{{ profile.user.username }}">
+                {% endif %}
             </div>
             <div class="col-md-8">
               <div class="card-body">
