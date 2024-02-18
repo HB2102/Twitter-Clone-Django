@@ -16,15 +16,29 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-2">
-                                {% if profile.profile_image %}
-                                <img style="height: 100%; aspect-ratio : 1 / 1;" src="{{ profile.profile_image.url }}" class="rounded-circle col-12" alt="{{ profile.user.username }}">
+                                {% if tweet.user.profile.profile_image %}
+                                <img style="height: 100%; aspect-ratio : 1 / 1;" src="{{ tweet.user.profile.profile_image.url }}" class="rounded-circle col-12" alt="{{ profile.user.username }}">
                                 {% else %}
                                 <img style="height: 100%; aspect-ratio : 1 / 1;" src="{% static 'images/default_profile_picture.png' %}" class="rounded-circle col-12" alt="{{ profile.user.username }}">
                                 {% endif %}
                             </div>
                             <div class="col-10" align="left">
                                 {{ tweet.body }} <br><br>
-                                <small class="text-muted">{{ tweet.created_at }} By <a href="{% url 'profile' tweet.user.id %}">@{{ tweet.user.username|lower }}</a></small>
+                                <div align="end">
+                                    <small class="text-muted">{{ tweet.created_at }} By <a href="{% url 'profile' tweet.user.id %}">@{{ tweet.user.username|lower }}</a></small>
+                                    &nbsp;
+                                    &nbsp;
+                                  {{ tweet.number_of_likes }}
+                                    {% if user in tweet.likes.all %}
+                                    <a href="{% url 'tweet_like' tweet.id %}" style="color: red"><i class="fa-solid fa-heart"></i></a>
+                                    {% else %}
+                                    <a href="{% url 'tweet_like' tweet.id %}" style="color: red"><i class="fa-regular fa-heart"></i></a>
+                                    {% endif %}
+                                    &nbsp;
+                                    &nbsp;
+                                    <a href="{% url 'tweet_show' tweet.id %}" style="color:gray"><i class="fa-solid fa-share"></i></a>
+                                </div>
+
                             </div>
                         </div>
                     </div>

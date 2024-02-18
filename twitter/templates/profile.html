@@ -23,7 +23,20 @@
                             </div>
                             <div class="col-lg-10 col-ld-9 col-sm-9 col-xs-8" align="left">
                                 {{ tweet.body }} <br><br>
-                                <small class="text-muted">{{ tweet.created_at }} By <a href="{% url 'profile' tweet.user.id %}">@{{ tweet.user.username|lower }}</a></small>
+                                <div align="end">
+                                    <small class="text-muted">{{ tweet.created_at }} By <a href="{% url 'profile' tweet.user.id %}">@{{ tweet.user.username|lower }}</a></small>
+                                    &nbsp;
+                                    &nbsp;
+                                  {{ tweet.number_of_likes }}
+                                    {% if user in tweet.likes.all %}
+                                    <a href="{% url 'tweet_like' tweet.id %}" style="color: red"><i class="fa-solid fa-heart"></i></a>
+                                    {% else %}
+                                    <a href="{% url 'tweet_like' tweet.id %}" style="color: red"><i class="fa-regular fa-heart"></i></a>
+                                    {% endif %}
+                                    &nbsp;
+                                    &nbsp;
+                                    <a href="{% url 'tweet_show' tweet.id %}" style="color:gray"><i class="fa-solid fa-share"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,8 +69,9 @@
               <div class="card-body">
                 <p class="card-text">
                     {% for following in profile.follows.all %}
-                        <a href="{% url 'profile' following.user.id %}">@{{ following }}</a><br>
-
+                    {% if following.id != profile.user.id %}
+                        <a href="{% url 'profile' following.user.id %}" class="btn btn-outline-primary col-12" style="margin-top: 0.25rem">@{{ following }}</a><br>
+                    {% endif %}
                     {% endfor %}
                 </p>
               </div>
@@ -70,8 +84,9 @@
               <div class="card-body">
                 <p class="card-text">
                     {% for followed in profile.followed_by.all %}
-                        <a href="{% url 'profile' followed.user.id %}">@{{ followed }}</a><br>
-
+                    {% if followed.id != profile.user.id %}
+                        <a href="{% url 'profile' followed.user.id %}" class="btn btn-outline-primary col-12" style="margin-top: 0.25rem">@{{ followed }}</a><br>
+                    {% endif %}
                     {% endfor %}
 
                     {% endif %}
