@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Profile, Tweet
 from django.contrib import messages
 from .forms import TweetForm
+from django.contrib.auth import login, logout, authenticate
 
 
 def home(request):
@@ -55,3 +56,27 @@ def profile(request, pk):
     else:
         messages.success(request, 'You must be logged in to access this page')
         return redirect('home')
+
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, "You logged in successfully!")
+            return redirect('home')
+
+        else:
+            messages.success(request, "There was a problem with tour authentication. Please try again.")
+            return redirect('login')
+
+    else:
+        return render(request, 'login.html', {})
+
+
+def logout_user(request):
+    logout(request)
+    messages.success(request, "You logged out successfully.")
+    return redirect('home')
