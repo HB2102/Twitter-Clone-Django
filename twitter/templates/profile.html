@@ -49,7 +49,10 @@
         <div class="col-lg-4 col-ld-4 col-sm-4 col-12">
             {% if profile.profile_image %}
             <img src="{{ profile.profile_image.url }}" style="width: 80%; aspect-ratio : 1 / 1;" class="rounded-circle"> <br><br>
+            {% else %}
+            <img src="{% static 'images/default_profile_picture.png' %}" style="width: 80%; aspect-ratio : 1 / 1;" class="rounded-circle col-12" alt="{{ profile.user.username }}">
             {% endif %}
+            {% if request.user.id != profile.user.id %}
             <form method="POST">
                 {% csrf_token %}
                 {% if profile in user.profile.follows.all %}
@@ -61,6 +64,41 @@
                         Follow {{ profile.user.username|lower }}
                     </button><br><br>
                 {% endif %}
+            {% endif %}
+
+                <p align="justify">
+                    {% if profile.profile_bio %}
+                    {{ profile.profile_bio }}
+                    {% endif %}
+                </p>
+
+                <div class="row">
+                    <div class="col-12" style="display: flex; justify-content: space-around">
+                        {%if profile.homepage_link %}
+                        <a href="{{ profile.homepage_link }}" style="color:black; font-size: 1.5rem" target="_blank"><i class="fa-solid fa-globe"></i></a>
+                        {% endif %}
+
+                        {%if profile.facebook_link %}
+                        <a href="{{ profile.facebook_link }}" style="color: #4267B2; font-size: 1.5rem" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                        {% endif %}
+
+                        {%if profile.linkedin_link %}
+                        <a href="{{ profile.linkedin_link }}" style="color: #004182; font-size: 1.5rem" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                        {% endif %}
+
+                        {%if profile.instagram_link %}
+                        <a href="{{ profile.instagram_link }}" style="color: #C13584; font-size: 1.5rem" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                        {% endif %}
+
+                        {%if profile.telegram_link %}
+                        <a href="{{ profile.telegram_link }}" style="color: #0088cc; font-size: 1.5rem" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+
+
+
+
             </form>
             <div class="card">
               <div class="card-header">
