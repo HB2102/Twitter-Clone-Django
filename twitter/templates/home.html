@@ -41,6 +41,9 @@
                                     &nbsp;
                                     {% if tweet.user.id == user.id %}
                                     <a href="{% url 'delete_tweet' tweet.id %}" style="color:gray"><i class="fa-solid fa-trash"></i></a>
+                                    &nbsp;
+                                    &nbsp;
+                                    <a href="{% url 'edit_tweet' tweet.id %}" style="color:gray"><i class="fa-regular fa-pen-to-square"></i></a>
                                     {% endif %}
                                 </div>
 

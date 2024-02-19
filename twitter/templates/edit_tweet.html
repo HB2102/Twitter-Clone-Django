@@ -6,7 +6,7 @@
 
 <div class="container text-center">
     <div class="row">
-        <div class="col-lg-8 col-ld-8 col-sm-8 col-12">
+        <div >
             {% if tweet %}
 
             <div class="alert alert-dark" role="alert">
@@ -37,9 +37,6 @@
                                 &nbsp;
                                 {% if tweet.user.id == user.id %}
                                 <a href="{% url 'delete_tweet' tweet.id %}" style="color:gray"><i class="fa-solid fa-trash"></i></a>
-                                &nbsp;
-                                &nbsp;
-                                <a href="{% url 'edit_tweet' tweet.id %}" style="color:gray"><i class="fa-regular fa-pen-to-square"></i></a>
                                 {% endif %}
 
 
@@ -53,13 +50,13 @@
 
             {% endif %}
         </div>
-        <div class="col-lg-4 col-ld-4 col-sm-4 col-12">
+        <div >
 
             {% if form %}
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-              <button type="submit" class="btn btn-primary">Send Tweet</button>
+              <button type="submit" class="btn btn-primary">Edit Tweet</button>
             </form>
             {% endif %}
 </div>

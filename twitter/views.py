@@ -182,5 +182,31 @@ def delete_tweet(request, pk):
             return redirect('home')
 
     else:
-        messages.success(request, "Please Log In To Continue...")
+        messages.success(request, "Please login to continue...")
         return redirect(request.META.get("HTTP_REFERER"))
+
+
+def edit_tweet(request, pk):
+    if request.user.is_authenticated:
+        tweet = get_object_or_404(Tweet, id=pk)
+
+        if request.user.username == tweet.user.username:
+
+            form = TweetForm(request.POST or None, instance=tweet)
+            if request.method == "POST":
+                if form.is_valid():
+                    meep = form.save(commit=False)
+                    meep.user = request.user
+                    meep.save()
+                    messages.success(request, "Your tweet has been updated!")
+                    return redirect('home')
+            else:
+                return render(request, "edit_tweet.html", {'form': form, 'tweet': tweet})
+
+        else:
+            messages.success(request, "You can't access this tweet")
+            return redirect('home')
+
+    else:
+        messages.success(request, "Please login to continue...")
+        return redirect('home')
