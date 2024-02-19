@@ -4,8 +4,8 @@
 {% block content %}
 <br><br>
 {% if profiles %}
-    <h1>{{ see_user.username|lower }}'s followers</h1>
-    {% for profile in profiles.followed_by.all %}
+    <h1>{{ see_user.username|lower }} is following...</h1>
+    {% for profile in profiles.follows.all %}
     {% if profile.id != see_user.id %}
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
@@ -28,6 +28,7 @@
         <br><br>
     {% endif %}
     {% endfor %}
+
 
 {% endif %}
 

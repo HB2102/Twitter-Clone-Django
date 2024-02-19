@@ -113,6 +113,9 @@
                     {% endfor %}
                 </p>
               </div>
+                <div class="card-footer">
+                    <a href="{% url 'follows' profile.user.id %}" class="btn btn-sm btn-outline-dark col-12">See All</a>
+                </div>
             </div>
             <br>
             <div class="card">
@@ -131,7 +134,7 @@
                 </p>
               </div>
                 <div class="card-footer">
-                    <a href="{% url 'followers' profile.user.id %}" class="btn btn-outline-dark col-12">See All</a>
+                    <a href="{% url 'followers' profile.user.id %}" class="btn btn-sm btn-outline-dark col-12">See All</a>
                 </div>
             </div>
             <br>
