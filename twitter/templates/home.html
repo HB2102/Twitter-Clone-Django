@@ -36,7 +36,12 @@
                                     {% endif %}
                                     &nbsp;
                                     &nbsp;
-                                    <a href="{% url 'tweet_show' tweet.id %}" style="color:gray"><i class="fa-solid fa-share"></i></a>
+                                    <a href="{% url 'tweet_show' tweet.id %}" style="color:black"><i class="fa-solid fa-share"></i></a>
+                                    &nbsp;
+                                    &nbsp;
+                                    {% if tweet.user.id == user.id %}
+                                    <a href="{% url 'delete_tweet' tweet.id %}" style="color:gray"><i class="fa-solid fa-trash"></i></a>
+                                    {% endif %}
                                 </div>
 
                             </div>

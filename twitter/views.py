@@ -167,3 +167,20 @@ def follows(request, pk):
     else:
         messages.success(request, 'You must be logged in to access this page')
         return redirect('home')
+
+
+def delete_tweet(request, pk):
+    if request.user.is_authenticated:
+        tweet = get_object_or_404(Tweet, id=pk)
+        if request.user.username == tweet.user.username:
+            tweet.delete()
+
+            messages.success(request, "The tweet has been deleted")
+            return redirect(request.META.get("HTTP_REFERER"))
+        else:
+            messages.success(request, "You Don't Own That Meep!!")
+            return redirect('home')
+
+    else:
+        messages.success(request, "Please Log In To Continue...")
+        return redirect(request.META.get("HTTP_REFERER"))

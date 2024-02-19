@@ -33,6 +33,11 @@
                                 {% else %}
                                 <a href="{% url 'tweet_like' tweet.id %}" style="color: red"><i class="fa-regular fa-heart"></i></a>
                                 {% endif %}
+                                &nbsp;
+                                &nbsp;
+                                {% if tweet.user.id == user.id %}
+                                <a href="{% url 'delete_tweet' tweet.id %}" style="color:gray"><i class="fa-solid fa-trash"></i></a>
+                                {% endif %}
 
 
                             </div>

@@ -13,4 +13,5 @@ urlpatterns = [
     path('tweet_show/<int:pk>', views.tweet_show, name='tweet_show'),
     path('profile/followers/<int:pk>', views.followers, name='followers'),
     path('profile/follows/<int:pk>', views.follows, name='follows'),
+    path('delete_tweet/<int:pk>', views.delete_tweet, name='delete_tweet'),
 ]
