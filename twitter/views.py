@@ -210,3 +210,13 @@ def edit_tweet(request, pk):
     else:
         messages.success(request, "Please login to continue...")
         return redirect('home')
+
+
+def search(request):
+    if request.method == "POST":
+        search = request.POST['search']
+        searched = Tweet.objects.filter(body__contains=search)
+
+        return render(request, 'search.html', {'search': search, 'searched': searched})
+    else:
+        return render(request, 'search.html', {})
