@@ -1,0 +1,2 @@
+web: funicorn twitter.wsgi --log-file
+web: python manage.py migrate && gunicorn twitter.wsg
