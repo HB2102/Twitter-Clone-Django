@@ -14,8 +14,8 @@ SECRET_KEY = 'django-insecure-_0(t)&zl$*(k-$nl=7*ietmxiw5!fi2lxtclet8u-t2fh%o-js
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['twitter-clone-django-production.up.railway.app', 'https://twitter-clone-django-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://twitter-clone-django-production.up.railway.app']
 
 # Application definition
 
